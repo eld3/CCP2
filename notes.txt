@@ -1,0 +1,13 @@
+What does the code do?
+
+sat.h
+
+defines structs for sat clauses
+defines structs fro sat instances
+
+provides method headers for sat.c
+
+test_sat:
+
+expects SAT in form {[1,2,3,4][2,3,4][5,1]}
+where each number is a variable

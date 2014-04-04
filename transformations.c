@@ -4,5 +4,5 @@
 
 
 satinstance transform_to_3sat ( satinstance s){
-	return s
+	return s;
 }

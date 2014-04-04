@@ -1,7 +1,27 @@
-#include <stdio.h>
+#include "sat.h"
 
-int main(){
-	fprintf(stderr, "Hello world!\n");
-	exit(0);
-
+main()
+{
+  satinstance s;
+  while(1)
+    {
+      printf("Instance: ");
+      s = read_satinstance(stdin);
+      if (s)
+	{
+	  printf("\n%s\n","SAT form:" );
+	  write_satinstance(stdout,s);
+	  printf("\n");
+	  
+	  //transform to 3SAT
+	  //print 3SAT
+	  printf("\n%s\n","Transformed to 3SAT form:" );
+	  write_satinstance(stdout,s);
+	  printf("\n\n");
+	  
+	}
+      destroy_satinstance_fully(s);
+    }
 }
+ 
+
