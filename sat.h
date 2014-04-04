@@ -43,7 +43,7 @@ extern clause get_clause (satinstance  s, unsigned int pos);
 extern void destroy_satinstance ( satinstance s); /* does not destroy the clauses
 						   because they might be shared */
 extern void destroy_satinstance_fully ( satinstance s); /* does destroy the clauses
-						   use must ensure that
+						   user must ensure that
 						   they are not shared */
 
 /* IO functions */
