@@ -4,7 +4,7 @@ clean:
 	rm *.o task1 test_sat
 
 task1: task1.o sat.o transform.o
-	gcc task1.o sat.o -o task1 -Wall -Wextra -g -std=c99
+	gcc task1.o sat.o transform.o -o task1 -Wall -Wextra -g -std=c99
 
 task1.o: task1.c sat.h
 	gcc task1.c -c -o task1.o -Wextra -Wall -g -std=c99
@@ -18,5 +18,5 @@ test_sat.o: test_sat.c
 sat.o: sat.c sat.h
 	gcc sat.c -c -o sat.o -Wextra -Wall -g -std=c99
 
-transform.o: transformations.c sat.h
+transform.o: transformations.c transformations.h
 	gcc transformations.c -c -o transform.o -Wextra -Wall -g -std=c99

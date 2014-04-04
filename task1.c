@@ -1,4 +1,5 @@
 #include "sat.h"
+#include "transformations.h"
 
 main()
 {
@@ -14,6 +15,7 @@ main()
 	  printf("\n");
 	  
 	  //transform to 3SAT
+	  s = transform_to_3sat(s);
 	  //print 3SAT
 	  printf("\n%s\n","Transformed to 3SAT form:" );
 	  write_satinstance(stdout,s);
