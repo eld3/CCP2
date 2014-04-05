@@ -63,8 +63,6 @@ extern void write_satinstance ( FILE *f, satinstance  s);
 extern variable largest_variable_clause(clause c);
 extern variable largest_variable_satinstance(satinstance s);
 
-/* Transformation Functions */
-extern satinstance transform_to_3sat ( satinstance s);
 
 #endif
   

@@ -7,12 +7,24 @@ satinstance transform_to_3sat ( satinstance s){
 
 	//pseudo code method
 
-
+	unsigned int total_clauses = number_clauses(s);
+	printf("%i\n",total_clauses );
 	//get number of clauses and store
 	//for each clause
+	int i; //iterator
+	for (i=0; i < total_clauses; i++){
+
+		clause curr_clause = get_clause(s,i);
+		unsigned int clause_length = number_lits(curr_clause);
+		
+		if (clause_length < 3){
+			printf("%s\n","smaller than 3!" );
+
+		}else if (clause_length > 3){
+			printf("%s\n","bigger than 3!" );
+		}
+	}
 	
-	//if clause length == 3
-	//move on to next clause
 
 	//if clause length < 3
 	//find n = number of literals(clause)
@@ -55,14 +67,49 @@ satinstance transform_to_3sat ( satinstance s){
 
 
 
-// graph transform_to_graph ( satinstance s) {
+ // void transform_to_graph ( satinstance s) {
+
+ // }
 
 
+	//if clause length == 3
+	//move on to next clause
 
-// }
+	//if clause length < 3
+	//find n = number of literals(clause)
+	//for 3-n
+		//copy literal 1 and add to clause
+	//move on to next clause
 
+	//if clause length > 3
+	//get number_lits(clause)
+	//n = clause lenght - 2
+	//create n new clauses
 
+	//for clause 1 add first two existing literals
+	//add new literal
+	//add clause 1 to sat instance
+	//add new literals negation to clause 2
+	
+	//startloop:
 
+		//if curr literal is the  (clause length-1)th
+			//add last two literals to current clause
+			//add clause to sat instance
+			//remove starting clause from sat instance
+			//## end loop ##
+
+		//else 
+			//add curr literal to curr clause
+			//add new literal to curr clause
+			//add clause to sat instance
+			//add its negation to the next clause
+
+	//repeat loop
+
+	//loop end:
+
+	//move on to next clause
 
 
 
