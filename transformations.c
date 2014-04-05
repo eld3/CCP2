@@ -9,40 +9,59 @@ satinstance transform_to_3sat ( satinstance s){
 
 	unsigned int total_clauses = number_clauses(s);
 	printf("%i\n",total_clauses );
-	//get number of clauses and store
-	//for each clause
-	int i; //iterator
+	//define iterator
+	unsigned int i;
 	for (i=0; i < total_clauses; i++){
-
-		clause curr_clause = get_clause(s,i);
-		unsigned int clause_length = number_lits(curr_clause);
+		//get the current clause and its length
+		clause curr_sat_clause = get_clause(s,i);
+		unsigned int clause_length = number_lits(curr_sat_clause);
 		
+		//handle clauses that have less than 3 literals
 		if (clause_length < 3){
-			printf("%s\n","smaller than 3!" );
-
+			//find how many literals clause missing
+			unsigned int missing_literals = 3 - clause_length;
+			//define iterator
+			unsigned int j;
+			for(j=0; j<missing_literals; j++){
+				//add a new literal for every missing one
+				literal l = get_literal(curr_sat_clause,j);
+				add_literal(curr_sat_clause, l);
+			}
+		//handle clauses that have more than 3 literals
 		}else if (clause_length > 3){
 			printf("%s\n","bigger than 3!" );
-		}
-	}
+			unsigned int no_of_clauses = clause_length - 2;
+			printf("This will take %i clauses\n", no_of_clauses );
+			
+			unsigned int curr_clause_number;
+			for (curr_clause_number = 0; curr_clause_number < no_of_clauses; curr_clause_number++){
+
+				clause curr_clause = empty_clause();
+
+				//identify which clause is being created{}
+				if (curr_clause_number == 0){
+					//first clause
+					printf("%s\n","First Clause");
+				
+				}else if (curr_clause_number == no_of_clauses - 1){
+					//last clause
+					printf("%s\n","Last Clause");
+				
+				}else{
+					//middle clauses
+					printf("%s\n","Middle Clause" );
+				}
+
+				
+			}
+			
+			//create new clause
+			//for clause 1 add first two existing literals
+			//add new literal
+			//add clause 1 to sat instance
+			//add new literals negation to clause 2
 	
-
-	//if clause length < 3
-	//find n = number of literals(clause)
-	//for 3-n
-		//copy literal 1 and add to clause
-	//move on to next clause
-
-	//if clause length > 3
-	//get number_lits(clause)
-	//n = clause lenght - 2
-	//create n new clauses
-
-	//for clause 1 add first two existing literals
-	//add new literal
-	//add clause 1 to sat instance
-	//add new literals negation to clause 2
-	
-	//startloop:
+			//startloop:
 
 		//if curr literal is the  (clause length-1)th
 			//add last two literals to current clause
@@ -61,6 +80,15 @@ satinstance transform_to_3sat ( satinstance s){
 	//loop end:
 
 	//move on to next clause
+		}
+	}
+	
+
+	
+	
+
+	//if clause length > 3
+	
 
 	return s;
 }
