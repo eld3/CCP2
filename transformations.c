@@ -7,21 +7,45 @@ satinstance transform_to_3sat ( satinstance s){
 
 	//pseudo code method
 
-	//get number of clauses
+
+	//get number of clauses and store
 	//for each clause
 	
 	//if clause length == 3
-	//move on
+	//move on to next clause
 
 	//if clause length < 3
 	//add the clause (3-clause length times)
-	//move on
+	//move on to next clause
 
 	//if clause length > 3
 	//panic!!
 
-	//test each clause length
+	//get number_lits(clause)
+	//n = clause lenght - 2
+	//create n new clauses
 
+	//for clause 1 add first two existing literals
+	//add new literal
+	//add clause 1 to sat instance
+	//add new literals negation to clause 2
+	
+	//startloop:
+
+	//if curr literal is the  (clause length-1)th
+	//add last two literals to current clause
+	//add clause to sat instance
+	//remove starting clause from sat instance
+	//end loop;
+
+	//else add curr literal to curr clause
+	//add new literal to curr clause
+	//add clause to sat instance
+	//add its negation to the next clause
+
+	//repeat loop
+
+	//loop end:
 
 	return s;
 }
@@ -35,9 +59,11 @@ satinstance transform_to_3sat ( satinstance s){
 
 
 //if == 4
-//create one new clause
-//move last 2 literals to new clause
-//add in new literal in first clause and its negation in the second clause.
+//create two new clauses
+//add first two literals to the first clause
+//add new literal to first clause
+//add its negation to the second clause
+//add last to literals to the second clause
 //move on
 
 //if == 5
