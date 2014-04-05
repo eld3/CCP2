@@ -53,6 +53,32 @@ satinstance transform_to_3sat ( satinstance s){
 	return s;
 }
 
+
+
+// graph transform_to_graph ( satinstance s) {
+
+
+
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //current panic plan
 
 //length || New Clauses || Literals ||  l-3  ||
