@@ -3,6 +3,52 @@
 #include <ctype.h>
 
 
+
+   graph transform_to_graph ( satinstance s) {
+
+	// graph transform_to_graph ( satinstance s) {
+
+	//pseudo code for the graph transformation
+	//take your 3 sat form
+	//get total number of clauses
+	
+	//get total number of variables
+	//for each clause
+	//look at each literal 
+	//if unique variable add to the sum of variables
+	
+	//calculate number of nodes needed
+	int sum = 10;
+	//3*sum of variables + number of clauses
+	
+	//create graph
+	graph g = empty_graph(sum,true);
+	
+
+	//define variables to identfy that
+	//n = total variables
+	//0 to n-1 represent every variable (Y's)
+	//n to 2n-1 represent every +ve literal
+	//2n to 3n-1 represent every -ve literal
+	//3n to 3n+(k-1) represent every clause
+	
+	
+	//join every Y to every other Y
+	//join every positive literal to its negative one
+	//join every Y representing a variable to all other variables than the one it represents
+	//join every Clause node to every variable not appearing in its clause
+
+	//save n somewhere your gonna need it when colouring?!
+   	return g;
+   }
+
+
+
+  
+
+
+
+
 satinstance transform_to_3sat ( satinstance s){
 
 	//pseudo code method
@@ -112,7 +158,19 @@ satinstance transform_to_3sat ( satinstance s){
 
 
 
- // void transform_to_graph ( satinstance s) {
+//pseudo code for the graph transformation
+	//take your 3 sat form
+	//get total number of variables
+	//get total number of clauses
+	
+	//add a node to represent every variable (Y's)
+	//add a node to represent every +ve literal
+	//add a node to represent every -ve literal
+	//add a node to represent every clause
+	
+	//join every positive literal to its negative one
+	//join every Y to every other Y
+	//join every Y representing a variable to all other variables than the one it represents
+	//join every Clause node to every variable not appearing in its clause
 
- // }
-
+	//return the new graph

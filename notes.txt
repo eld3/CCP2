@@ -9,5 +9,13 @@ provides method headers for sat.c
 
 test_sat:
 
-expects SAT in form {[1,2,3,4][2,3,4][5,1]}
+expects SAT in form {[1,2,-3,4][2,-3,4][5,1]}
 where each number is a variable
+
+test_graph:
+
+Asks for a number of nodes (verticies)
+Lets you draw links by giving node names spaced, nb counts from 0, eg. 1 2 would link node 1 and 2
+Asks you the maximum number of allowed colours to colour in
+Colours the nodes
+Returns the resulting colour of each node.
