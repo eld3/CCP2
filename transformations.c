@@ -10,7 +10,6 @@ satinstance transform_to_3sat ( satinstance s){
 	variable largest = largest_variable_satinstance(s);
 
 	unsigned int total_clauses = number_clauses(s);
-	printf("%i\n",total_clauses );
 	//define iterator
 	unsigned int i;
 	for (i=0; i < total_clauses; i++){
@@ -27,17 +26,17 @@ satinstance transform_to_3sat ( satinstance s){
 			for(j=0; j<missing_literals; j++){
 				//add a new literal for every missing one
 				literal l = get_literal(curr_sat_clause,j);
-				add_literal(curr_sat_clause, l);
-				add_clause(new_s,curr_sat_clause);
+				add_literal(curr_sat_clause, l);				
 			}
+			add_clause(new_s,curr_sat_clause);
 		//handle clauses that have more than 3 literals
 		}else if(clause_length == 3){
 			add_clause(new_s,curr_sat_clause);
 
 		}else if (clause_length > 3){
-			printf("%s\n","bigger than 3!" );
+
 			unsigned int no_of_clauses = clause_length - 2;
-			printf("This will take %i clauses\n", no_of_clauses );
+
 
 			clause curr_clause;
 			variable clause_joiner;
@@ -52,7 +51,6 @@ satinstance transform_to_3sat ( satinstance s){
 				if (curr_clause_number == 0){
 
 					//first clause
-					printf("%s\n","First Clause");
 					//for clause 1 add first two existing literals
 					literal first = get_literal(curr_sat_clause,current_sat_literal);
 					current_sat_literal++;
@@ -73,7 +71,6 @@ satinstance transform_to_3sat ( satinstance s){
 				
 				}else if (curr_clause_number == no_of_clauses - 1){
 					//last clause
-					printf("%s\n","Last Clause");
 					//add negation from previously added new literal to curr clause
 					literal lit_to_add = negative(clause_joiner);
 					add_literal(curr_clause,lit_to_add);
@@ -91,7 +88,6 @@ satinstance transform_to_3sat ( satinstance s){
 				
 				}else{
 					//middle clauses
-					printf("%s\n","Middle Clause" );
 					//add negation from previously added new literal to curr clause
 					literal lit_to_add = negative(clause_joiner);
 					add_literal(curr_clause,lit_to_add);
@@ -103,7 +99,6 @@ satinstance transform_to_3sat ( satinstance s){
 					clause_joiner = largest;
 					//add its positive version to the clause
 					lit_to_add = positive(clause_joiner);
-					printf("Lit to add is %i\n",lit_to_add );
 					add_literal(curr_clause,lit_to_add);
 					//add the whole clause to the sat instance
 					add_clause(new_s,curr_clause);
