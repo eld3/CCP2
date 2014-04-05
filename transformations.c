@@ -6,7 +6,8 @@
 satinstance transform_to_3sat ( satinstance s){
 
 	//pseudo code method
-	satinstance new_s = empty_satinstance(); 
+	satinstance new_s = empty_satinstance();
+	variable largest = largest_variable_satinstance(s);
 
 	unsigned int total_clauses = number_clauses(s);
 	printf("%i\n",total_clauses );
@@ -38,18 +39,14 @@ satinstance transform_to_3sat ( satinstance s){
 			unsigned int no_of_clauses = clause_length - 2;
 			printf("This will take %i clauses\n", no_of_clauses );
 
-			clause prev_clause;
 			clause curr_clause;
-			variable largest;
 			variable clause_joiner;
 			int current_sat_literal = 0;
 			
 			unsigned int curr_clause_number;
 			for (curr_clause_number = 0; curr_clause_number < no_of_clauses; curr_clause_number++){
 
-				prev_clause = curr_clause;
-				curr_clause = empty_clause();
-				largest = largest_variable_satinstance(s);
+				curr_clause = empty_clause();				
 
 				//identify which clause is being created{}
 				if (curr_clause_number == 0){
@@ -59,12 +56,14 @@ satinstance transform_to_3sat ( satinstance s){
 					//for clause 1 add first two existing literals
 					literal first = get_literal(curr_sat_clause,current_sat_literal);
 					current_sat_literal++;
-					add_literal(curr_clause,first);					
+					add_literal(curr_clause,first);	
+					//add second literal				
 					literal second = get_literal(curr_sat_clause,current_sat_literal);
 					current_sat_literal++;
 					add_literal(curr_clause,second);
 					//create a variable bigger than current largest
-					clause_joiner = largest + 1;
+					largest++;
+					clause_joiner = largest;
 					//add its positive version to the clause
 					literal lit_to_add = positive(clause_joiner);
 					add_literal(curr_clause,lit_to_add);
@@ -96,12 +95,15 @@ satinstance transform_to_3sat ( satinstance s){
 					//add negation from previously added new literal to curr clause
 					literal lit_to_add = negative(clause_joiner);
 					add_literal(curr_clause,lit_to_add);
+					//add the next original literal
 					lit_to_add = get_literal(curr_sat_clause,current_sat_literal);
 					current_sat_literal++;
 					add_literal(curr_clause, lit_to_add);
-					clause_joiner = largest + 1;
+					largest++;
+					clause_joiner = largest;
 					//add its positive version to the clause
 					lit_to_add = positive(clause_joiner);
+					printf("Lit to add is %i\n",lit_to_add );
 					add_literal(curr_clause,lit_to_add);
 					//add the whole clause to the sat instance
 					add_clause(new_s,curr_clause);
@@ -109,6 +111,7 @@ satinstance transform_to_3sat ( satinstance s){
 			}			
 		}
 	}
+	destroy_satinstance(s);
 	return new_s;
 }
 
