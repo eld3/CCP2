@@ -1,6 +1,7 @@
 #include "sat.h"
 #include <stdlib.h>
 #include <ctype.h>
+#include "transformations.h"
 
 
 

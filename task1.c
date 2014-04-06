@@ -1,4 +1,5 @@
 #include "sat.h"
+#include "graph.h"
 #include "transformations.h"
 
 main()
@@ -23,15 +24,19 @@ main()
 
 	  //transform to graph
 	  graph g = transform_to_graph(s);
-	  write_graph(stdout,g);
+	 
 
 	  //print out graph
 	  printf("\n%s\n","Transformed to Graph:" );
-	  write_satinstance(stdout,s);
-	  printf("\n\n");
+	  write_graph(stdout,g);
+	  
+	  //write_satinstance(stdout,s);
+	  //printf("\n\n");
 	}
       destroy_satinstance_fully(s);
     }
+
+    return 0;
 }
  
 

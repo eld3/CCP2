@@ -1,5 +1,5 @@
-#ifndef SAT_H
-#define SAT_H
+#ifndef TRANSFORMATIONS_H
+#define TRANSFORMATIONS_H
 
 
 #include <stdio.h>
