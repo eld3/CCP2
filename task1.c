@@ -29,7 +29,9 @@ main()
 	  //print out graph
 	  printf("\n%s\n","Transformed to Graph:" );
 	  write_graph(stdout,g);
-	  
+
+	  //ensure more than 4 nodes
+
 	  //write_satinstance(stdout,s);
 	  //printf("\n\n");
 	}

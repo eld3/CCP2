@@ -6,37 +6,81 @@
 
 
    graph transform_to_graph ( satinstance s) {
-
-	// graph transform_to_graph ( satinstance s) {
-
-	//pseudo code for the graph transformation
-	//take your 3 sat form
-	//get total number of clauses
+   	//define iterators
+	int i, j, k;
+	//find number of clauses 
+	int num_clause = number_clauses(s);
+	//maximum variables
+	int max_variables = 3 * num_clause;
+	//define array to store the variables
+	variable array[max_variables];
+	initialise_array(array,max_variables);
+	//iterate through all clauses
+	int curr_arr_pos = 0;
+	for (i = 0; i < num_clause; i++){		
+	//iterate through every literal]
+	 	clause c = get_clause( s, i);
+		for (j = 0; j < 3; j++){
+			variable v = var(get_literal(c,j));
+			if(!in_array(v,array,max_variables)){
+				printf("Not in array, clause %i, %i\n",i,j);
+				array[curr_arr_pos] = v;
+				curr_arr_pos++;
+			}
+		}
+	 }
+	 int number_variables = curr_arr_pos;
 	
-	//get total number of variables
-	//for each clause
-	//look at each literal 
-	//if unique variable add to the sum of variables
+	
+	//define variables to identfy that
+	int number_of_nodes = 3 * number_variables + num_clause;
+	printf("%s%i\n","number of variables ", number_variables );
+	//markers for node positioning
+	int first_Y = 0;
+	int last_Y = number_variables-1;
+	int first_pos_literal = number_variables;
+	int last_pos_literal = 2 * number_variables -1;
+	int first_neg_literal = 2 * number_variables;
+	int last_neg_literal = 3 * number_variables -1;
+	int first_clause = 3 * number_variables;
+	int last_clause = number_of_nodes -1;
 	
 	//calculate number of nodes needed
-	int sum = 10;
+	
 	//3*sum of variables + number of clauses
 	
 	//create graph
-	graph g = empty_graph(sum,true);
-	
-
-	//define variables to identfy that
-	//n = total variables
-	//0 to n-1 represent every variable (Y's)
-	//n to 2n-1 represent every +ve literal
-	//2n to 3n-1 represent every -ve literal
-	//3n to 3n+(k-1) represent every clause
+	graph g = empty_graph(number_of_nodes, true);
 	
 	
 	//join every Y to every other Y
+	for ( i = first_Y; i < last_Y; i++){
+		for (j = i+1; j <= last_Y; j++){
+			//link all Y's
+			add_edge(g,i,j);
+		}
+	}
+
 	//join every positive literal to its negative one
-	//join every Y representing a variable to all other variables than the one it represents
+	for (i = first_pos_literal, j = first_neg_literal; i <= last_pos_literal; i++, j++){
+		add_edge(g,i,j);
+	}
+
+	//join every Y representing a variable to all other variables apart from the one it represents
+
+	for ( i = first_Y; i < last_Y; i++){
+		for(j = first_pos_literal; j < last_pos_literal; j++){
+			if(j != i + number_variables ){
+				add_edge(g,i,j);
+			}
+		}
+		 for(k = first_neg_literal; k < last_neg_literal; k++){
+			if(k != i + 2* number_variables ){
+				add_edge(g,i,k);
+			}
+		 }
+	}
+
 	//join every Clause node to every variable not appearing in its clause
 
 	//save n somewhere your gonna need it when colouring?!
@@ -45,7 +89,25 @@
 
 
 
-  
+int in_array(variable val, variable *array, int size){
+
+	int i;
+	for( i = 0; i < size; i ++){
+		if(array[i]==val){ 
+			printf("Match\n");
+			return 1;
+		}
+	}
+	return 0;
+}
+
+void initialise_array( variable *array, int size){
+
+	int i;
+	for( i = 0; i < size; i++){
+		array[i] = 0;
+	}
+}
 
 
 
