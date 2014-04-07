@@ -21,7 +21,7 @@ main()
   write_graph(stdout,g);
   printf("Max colours: ");
   scanf(" %u",&ncol);
-  cols = colour_graph(g,ncol);
+  cols = colour_graph(g,10);
   if (cols != NULL)
     {
       printf("Colours:");

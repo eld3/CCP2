@@ -20,7 +20,7 @@ int in_array(variable val, variable *array, int size);
 
 void initialise_array( variable *array, int size);
 
-int get_size( variable *array);
+int get_number_variables( variable *array);
 
 variable* create_variable_array(satinstance s);
 
