@@ -5,118 +5,94 @@
 
 
 
-   graph transform_to_graph ( satinstance s) {
-   	//define iterators
-	int i, j, k;
-	//find number of clauses 
-	int num_clause = number_clauses(s);
-	//maximum variables
-	int max_variables = 3 * num_clause;
-	//define array to store the variables
-	variable array[max_variables];
-	initialise_array(array,max_variables);
-	//iterate through all clauses
-	int curr_arr_pos = 0;
-	for (i = 0; i < num_clause; i++){		
-	//iterate through every literal]
-	 	clause c = get_clause( s, i);
-		for (j = 0; j < 3; j++){
-			variable v = var(get_literal(c,j));
-			if(!in_array(v,array,max_variables)){
-				array[curr_arr_pos] = v;
-				curr_arr_pos++;
-			}
-		}
-	 }
-	int number_variables = curr_arr_pos;
-	
-	
-	//define variables to identfy that
-	int number_of_nodes = 3 * number_variables + num_clause;
-	//markers for node positioning
-	int first_Y = 0;
-	int last_Y = number_variables-1;
-	int first_pos_literal = number_variables;
-	int last_pos_literal = 2 * number_variables -1;
-	int first_neg_literal = 2 * number_variables;
-	int last_neg_literal = 3 * number_variables -1;
-	int first_clause = 3 * number_variables;
-	int last_clause = number_of_nodes -1;
-	
-	//calculate number of nodes needed
-	
-	//3*sum of variables + number of clauses
-	
-	//create graph
-	graph g = empty_graph(number_of_nodes, true);	
-	//join every Y to every other Y
-	for ( i = first_Y; i < last_Y; i++){
-		for (j = i+1; j <= last_Y; j++){
-			//link all Y's
-			add_edge(g,i,j);
-		}
-	}
 
-	//join every positive literal to its negative one
-	for (i = first_pos_literal, j = first_neg_literal; i <= last_pos_literal; i++, j++){
+
+
+graph transform_to_graph ( satinstance s, variable *array, int num_var) {
+	//define iterators
+int i, j, k;
+int num_clause = number_clauses(s);
+//define variables to identfy that
+int number_of_nodes = 3 * num_var + num_clause;
+//markers for node positioning
+int first_Y = 0;
+int last_Y = num_var-1;
+int first_pos_literal = num_var;
+int last_pos_literal = 2 * num_var -1;
+int first_neg_literal = 2 * num_var;
+int last_neg_literal = 3 * num_var -1;
+int first_clause = 3 * num_var;
+int last_clause = number_of_nodes -1;
+
+//create graph
+graph g = empty_graph(number_of_nodes, true);	
+//join every Y to every other Y
+for ( i = first_Y; i < last_Y; i++){
+	for (j = i+1; j <= last_Y; j++){
+		//link all Y's
 		add_edge(g,i,j);
 	}
+}
+//join every positive literal to its negative one
+for (i = first_pos_literal, j = first_neg_literal; i <= last_pos_literal; i++, j++){
+	add_edge(g,i,j);
+}
+//join every Y representing a variable to all other variables apart from the one it represents
 
-	//join every Y representing a variable to all other variables apart from the one it represents
-
-	for ( i = first_Y; i <=last_Y; i++){
-		for(j = first_pos_literal; j <=last_pos_literal; j++){
-			if(j != i + number_variables ){
-				add_edge(g,i,j);
-			}
-		}
-		 for(k = first_neg_literal; k <=last_neg_literal; k++){
-			if(k != i + 2* number_variables ){
-				add_edge(g,i,k);
-			}
-		 }
-	}
-
-	//join every Clause node to every variable not appearing in its clause
-	int curr_literal;
-	for ( curr_literal = first_pos_literal; curr_literal <=last_neg_literal; curr_literal++){
-		int curr_cl;
-
-		//get corresponding variable
-		int variable_index = curr_literal%number_variables;
-		variable v = array[variable_index];
-
-		//convert to correspondiong literal
-		literal l;
-		if(curr_literal<first_neg_literal){
-			l = positive(v);
-		}else{
-			l= negative(v);
-		}
-
-		//
-		for(curr_cl = first_clause, i = 0; curr_cl <= last_clause; curr_cl++, i++){
-
-			clause current_clause = get_clause( s, i);
-			int in_clause = 0;
-			for(j=0; j<3; j++){
-
-				literal clause_lit = get_literal(current_clause,j);
-				if(clause_lit==l) in_clause = 1;
-			}
-			if(!in_clause) add_edge(g,curr_literal,curr_cl);
+for ( i = first_Y; i <=last_Y; i++){
+	//positive literals
+	for(j = first_pos_literal; j <=last_pos_literal; j++){
+		if(j != i + num_var ){
+			add_edge(g,i,j);
+			add_edge(g,i,j+num_var);
 		}
 	}
-	//save n somewhere your gonna need it when colouring?!
-   	return g;
-   }
+	 // for(k = first_neg_literal; k <=last_neg_literal; k++){
+		// if(k != i + 2* num_var ){
+		// 	add_edge(g,i,k);
+		// }
+	 // }
+}
+
+//join every Clause node to every variable not appearing in its clause
+int curr_literal;
+for ( curr_literal = first_pos_literal; curr_literal <=last_neg_literal; curr_literal++){
+	int curr_cl;
+
+	//get corresponding variable
+	int variable_index = curr_literal%num_var;
+	variable v = array[variable_index];
+
+	//convert to correspondiong literal
+	literal l;
+	if(curr_literal<first_neg_literal){
+		l = positive(v);
+	}else{
+		l= negative(v);
+	}
+
+	//
+	for(curr_cl = first_clause, i = 0; curr_cl <= last_clause; curr_cl++, i++){
+
+		clause current_clause = get_clause( s, i);
+		int in_clause = 0;
+		for(j=0; j<3; j++){
+
+			literal clause_lit = get_literal(current_clause,j);
+			if(clause_lit==l) in_clause = 1;
+		}
+		if(!in_clause) add_edge(g,curr_literal,curr_cl);
+	}
+}
+//save n somewhere your gonna need it when colouring?!
+	return g;
+}
 
 
 
 int in_array(variable val, variable *array, int size){
 
-	int i;
-	for( i = 0; i < size; i ++){
+	for(int i = 0; i < size; i ++){
 		if(array[i]==val){ 
 			return 1;
 		}
@@ -126,12 +102,50 @@ int in_array(variable val, variable *array, int size){
 
 void initialise_array( variable *array, int size){
 
-	int i;
-	for( i = 0; i < size; i++){
+	for(int i = 0; i < size; i++){
 		array[i] = 0;
 	}
 }
 
+int get_size( variable *array){
+	//count non 0 elements
+	int sum = 0;
+	while(array[sum]!=0){
+		++sum;
+	}
+	return sum;
+}
+
+
+variable* create_variable_array( satinstance s){
+
+	 //define iterators
+	int i, j;
+	//find number of clauses 
+	int num_clause = number_clauses(s);
+	int max_variables = 3 * num_clause;
+	//define array to store the variables
+	variable array[max_variables];
+	//set contents to 0
+	initialise_array(array,max_variables);
+	//iterate through all clauses
+	int curr_arr_pos = 0;
+	for (i = 0; i < num_clause; i++){		
+		//iterate through every literal
+ 		clause c = get_clause( s, i);
+		for (j = 0; j < 3; j++){
+			//only add variable if it doesn't yet exist
+			variable v = var(get_literal(c,j));
+			if(!in_array(v,array,max_variables)){
+				array[curr_arr_pos] = v;
+				curr_arr_pos++;
+			}
+		}
+ 	}
+ 	printf("Current array pos %i\n",curr_arr_pos);
+ 	printf("Get size array %i\n",get_size(array) );
+ 	return array;
+}
 
 
 

@@ -23,14 +23,17 @@ main()
 	  printf("\n");
 
 	  //transform to graph
-	  graph g = transform_to_graph(s);
-	 
-
+	  //get an array of all the variables
+	  variable *v = create_variable_array(s);
+	  //find the size of the array - ie number of variables
+	  int num_var = get_size(v);
+	  //make a graph
+	  graph g = transform_to_graph(s, v, num_var);
 	  //print out graph
-	  printf("\n%s\n","Transformed to Graph:" );
+	  printf("\n%s\n","Transformed to Graph:");
 	  write_graph(stdout,g);
+	  printf("Permitted to use %i colours\n",num_var+1);
 
-	  //ensure more than 4 nodes
 
 	  //write_satinstance(stdout,s);
 	  //printf("\n\n");
