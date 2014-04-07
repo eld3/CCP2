@@ -23,7 +23,6 @@
 		for (j = 0; j < 3; j++){
 			variable v = var(get_literal(c,j));
 			if(!in_array(v,array,max_variables)){
-				printf("Not in array, clause %i, %i\n",i,j);
 				array[curr_arr_pos] = v;
 				curr_arr_pos++;
 			}
@@ -34,7 +33,6 @@
 	
 	//define variables to identfy that
 	int number_of_nodes = 3 * number_variables + num_clause;
-	printf("%s%i\n","number of variables ", number_variables );
 	//markers for node positioning
 	int first_Y = 0;
 	int last_Y = number_variables-1;
@@ -80,18 +78,35 @@
 	}
 
 	//join every Clause node to every variable not appearing in its clause
+	int curr_literal;
+	for ( curr_literal = first_pos_literal; curr_literal <=last_neg_literal; curr_literal++){
+		int curr_cl;
 
-	for ( i = first_clause; i <=last_clause; i++){
-		/* code */
-		printf("In the clause %i\n",i );
+		//get corresponding variable
+		int variable_index = curr_literal%number_variables;
+		variable v = array[variable_index];
+
+		//convert to correspondiong literal
+		literal l;
+		if(curr_literal<first_neg_literal){
+			l = positive(v);
+		}else{
+			l= negative(v);
+		}
+
+		//
+		for(curr_cl = first_clause, i = 0; curr_cl <= last_clause; curr_cl++, i++){
+
+			clause current_clause = get_clause( s, i);
+			int in_clause = 0;
+			for(j=0; j<3; j++){
+
+				literal clause_lit = get_literal(current_clause,j);
+				if(clause_lit==l) in_clause = 1;
+			}
+			if(!in_clause) add_edge(g,curr_literal,curr_cl);
+		}
 	}
-
-
-
-
-
-
-
 	//save n somewhere your gonna need it when colouring?!
    	return g;
    }
@@ -103,7 +118,6 @@ int in_array(variable val, variable *array, int size){
 	int i;
 	for( i = 0; i < size; i ++){
 		if(array[i]==val){ 
-			printf("Match\n");
 			return 1;
 		}
 	}
