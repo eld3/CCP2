@@ -29,7 +29,7 @@
 			}
 		}
 	 }
-	 int number_variables = curr_arr_pos;
+	int number_variables = curr_arr_pos;
 	
 	
 	//define variables to identfy that
@@ -50,9 +50,7 @@
 	//3*sum of variables + number of clauses
 	
 	//create graph
-	graph g = empty_graph(number_of_nodes, true);
-	
-	
+	graph g = empty_graph(number_of_nodes, true);	
 	//join every Y to every other Y
 	for ( i = first_Y; i < last_Y; i++){
 		for (j = i+1; j <= last_Y; j++){
@@ -68,13 +66,13 @@
 
 	//join every Y representing a variable to all other variables apart from the one it represents
 
-	for ( i = first_Y; i < last_Y; i++){
-		for(j = first_pos_literal; j < last_pos_literal; j++){
+	for ( i = first_Y; i <=last_Y; i++){
+		for(j = first_pos_literal; j <=last_pos_literal; j++){
 			if(j != i + number_variables ){
 				add_edge(g,i,j);
 			}
 		}
-		 for(k = first_neg_literal; k < last_neg_literal; k++){
+		 for(k = first_neg_literal; k <=last_neg_literal; k++){
 			if(k != i + 2* number_variables ){
 				add_edge(g,i,k);
 			}
@@ -82,6 +80,17 @@
 	}
 
 	//join every Clause node to every variable not appearing in its clause
+
+	for ( i = first_clause; i <=last_clause; i++){
+		/* code */
+		printf("In the clause %i\n",i );
+	}
+
+
+
+
+
+
 
 	//save n somewhere your gonna need it when colouring?!
    	return g;
@@ -120,32 +129,27 @@ satinstance transform_to_3sat ( satinstance s){
 
 	unsigned int total_clauses = number_clauses(s);
 	//define iterator
-	unsigned int i;
+	unsigned int i, j;
 	for (i=0; i < total_clauses; i++){
 		//get the current clause and its length
 		clause curr_sat_clause = get_clause(s,i);
 		unsigned int clause_length = number_lits(curr_sat_clause);
 		
 		//handle clauses that have less than 3 literals
-		if (clause_length < 3){
+		if (clause_length <= 3){
 			//find how many literals clause missing
 			unsigned int missing_literals = 3 - clause_length;
-			//define iterator
-			unsigned int j;
+		
 			for(j=0; j<missing_literals; j++){
 				//add a new literal for every missing one
 				literal l = get_literal(curr_sat_clause,j);
 				add_literal(curr_sat_clause, l);				
 			}
 			add_clause(new_s,curr_sat_clause);
-		//handle clauses that have more than 3 literals
-		}else if(clause_length == 3){
-			add_clause(new_s,curr_sat_clause);
 
 		}else if (clause_length > 3){
 
 			unsigned int no_of_clauses = clause_length - 2;
-
 
 			clause curr_clause;
 			variable clause_joiner;
