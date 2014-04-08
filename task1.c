@@ -8,53 +8,46 @@ int main(){
   
   
 	while(1){
+		//declare variables used
 	    int num_var;
 	    colour ncol;
 	    colouring cols;
 	    variable *v;
 	    satinstance s, new_s;
 	    graph g;
+	    //begin methods
 	    printf("\nInstance: ");
 	    s = read_satinstance(stdin);
 	    if (s){
-
+	    	//show in sat form
 		    printf("\n%s\n","SAT form:" );
 		    write_satinstance(stdout,s);
-		    printf("\n");
-		  
+		    printf("\n");		  
 		    //transform to 3SAT
 		    new_s = transform_to_3sat(s);
 		    //print 3SAT
 		    printf("\n%s\n","Transformed to 3SAT form:" );
 		    write_satinstance(stdout,new_s);
 		    printf("\n");
-
-		    //transform to graph
-		    //get an array of all the variables
+		    //get an array of all the variables and find the total number
 		    v = create_variable_array(new_s);
-		    //find the size of the array - ie number of variables
 		    num_var = get_number_variables(v);
-		    //make a graph
+		    //transform to a graph
 		    g = transform_to_graph(new_s, v, num_var);
-		    //print out graph
+		    //print out the graph
 		    printf("\n%s\n\n","Transformed to Graph:");
 		    write_graph(stdout,g);
+		    //calculate permitted colours
 		    ncol = num_var+1;
 		    printf("Permitted to use %i colours\n\n",ncol);
 		    //colour the graph
 		    cols = colour_graph(g,ncol);
-		    //print the truth values
+		    //print colouring result and values that satisfy the sat expression
 		    if(cols==NULL){
 		    	printf("Not able to be Coloured!\n");
 		    }else{
-
 		    	print_sat_solutions(cols,num_var,s,v);
-
-
 		    }
-
-
-
 		    //free memory
 		    free(v);
 		    destroy_satinstance_fully(new_s); 
