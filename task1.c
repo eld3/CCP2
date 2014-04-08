@@ -35,17 +35,24 @@ int main(){
 		    //print out the graph
 		    printf("\n%s\n\n","Transformed to Graph:");
 		    write_graph(stdout,g);
+		    
 		    //calculate permitted colours
-		    ncol = num_var+1;
-		    printf("Permitted to use %i colours\n\n",ncol);
-		    //colour the graph
-		    cols = colour_graph(g,ncol);
-		    //print colouring result and values that satisfy the sat expression
-		    if(cols==NULL){
-		    	printf("Not able to be Coloured!\n");
+		    if(num_var<4){
+		    	printf("Unable to use graph colouring to solve when less than 4 variables\n");
+
 		    }else{
-		    	print_sat_solutions(cols,num_var,s,v);
-		    }
+			    ncol = num_var+1;
+			    printf("Permitted to use %i colours\n\n",ncol);
+			    
+
+			    cols = colour_graph(g,ncol);
+			    //print colouring result and values that satisfy the sat expression
+			    if(cols==NULL){
+			    	printf("Not able to be Coloured!\n");
+			    }else{
+			    	print_sat_solutions(cols,num_var,s,v);
+			    }
+			}
 		    //get from graph to sat
 		    printf("\n\nExtension Task:\n");
 		    printf("Reformed SAT instance:\n");
