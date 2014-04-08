@@ -4,10 +4,13 @@
 #include "transformations.h"
 
 
+/**/
 satinstance get_sat(graph g){
 
 	satinstance s;
-	int num_var, num_nodes, num_clause;
+	int num_var, num_nodes, num_clause, i, j;
+	literal l;
+	clause c;
 
 	num_var = get_variables(g);
 	printf("There are %i variables\n",num_var);
@@ -15,22 +18,30 @@ satinstance get_sat(graph g){
 	num_clause = num_nodes - (num_var*3);
 	printf("There are %i clauses\n",num_clause);
 
-
-
-
-
-
-
-
-
-
-
-
 	s = empty_satinstance();
-	return s;
+	for(i = num_var*3; i<num_nodes; i++ ){
+		c = empty_clause();		
+		for(j=num_var; j<=3*num_var-1; j++ ){
 
+			if(!is_adjacent(g,i,j)){
+				//add literal to clause
+				//split if +ve or -ve
+				if(j<2*num_var){
+					l = positive(j);
+				}else{
+					l = negative(j-num_var);
+				}
+				add_literal(c,l);
+				if(number_lits(c)==3)break;
+			}
+		}
+		add_clause(s,c);
+	}	
+	return s;
 }
 
+
+/**/
 int get_variables(graph g){
 	//declare variables
 	int i, total_nodes;
@@ -163,7 +174,8 @@ graph transform_to_graph ( satinstance s, variable *array, int num_var) {
 	return g;
 }
 
-//Method to create an array of variable from a SAT instance
+
+/*Method to create an array of variable from a SAT instance*/
 variable* create_variable_array( satinstance s){
 
 	 //define iterators
@@ -221,6 +233,7 @@ int get_number_variables( variable *array){
 	return sum;
 }
 
+/**/
 satinstance transform_to_3sat ( satinstance s){
 
 	//pseudo code method

@@ -50,7 +50,9 @@ int main(){
 		    printf("\n\nExtension Task:\n");
 		    printf("Reformed SAT instance:\n");
 		    reworked_s = get_sat(g);
-
+		    //print reworked sat
+		    write_satinstance(stdout,reworked_s);
+		    printf("\n");
 		    //free memory
 		    free(v);
 		    destroy_satinstance_fully(new_s); 
