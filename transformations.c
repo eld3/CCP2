@@ -4,28 +4,25 @@
 #include "transformations.h"
 
 
-/**/
+/*This methods gets an instance of SAT from a given graph
+it assumes the nodes are ordered with Y nodes first, then
++ve X then -ve X then C nodes*/
 satinstance get_sat(graph g){
-
+	//define variables
 	satinstance s;
 	int num_var, num_nodes, num_clause, i, j;
 	literal l;
 	clause c;
-
+	//get variables
 	num_var = get_variables(g);
-	printf("There are %i variables\n",num_var);
 	num_nodes = number_vertices(g);
 	num_clause = num_nodes - (num_var*3);
-	printf("There are %i clauses\n",num_clause);
-
 	s = empty_satinstance();
+	//create clauses
 	for(i = num_var*3; i<num_nodes; i++ ){
 		c = empty_clause();		
 		for(j=num_var; j<=3*num_var-1; j++ ){
-
 			if(!is_adjacent(g,i,j)){
-				//add literal to clause
-				//split if +ve or -ve
 				if(j<2*num_var){
 					l = positive(j);
 				}else{
@@ -41,7 +38,9 @@ satinstance get_sat(graph g){
 }
 
 
-/**/
+/*Find the number of variables in a graph
+works on assuming the decribed node order for 
+the get_sat() method*/
 int get_variables(graph g){
 	//declare variables
 	int i, total_nodes;
@@ -158,7 +157,6 @@ graph transform_to_graph ( satinstance s, variable *array, int num_var) {
 		}else{
 			l= negative(v);
 		}
-
 		for(curr_cl = first_clause, i = 0; curr_cl <= last_clause; curr_cl++, i++){
 			in_clause = 0;
 			clause current_clause = get_clause( s, i);
@@ -177,7 +175,6 @@ graph transform_to_graph ( satinstance s, variable *array, int num_var) {
 
 /*Method to create an array of variable from a SAT instance*/
 variable* create_variable_array( satinstance s){
-
 	 //define iterators
 	int i, j;
 	//find number of clauses 
@@ -233,13 +230,12 @@ int get_number_variables( variable *array){
 	return sum;
 }
 
-/**/
+/*Method to transform a sat instance to 3sat*/
 satinstance transform_to_3sat ( satinstance s){
 
 	//pseudo code method
 	satinstance new_s = empty_satinstance();
 	variable largest = largest_variable_satinstance(s);
-
 	unsigned int total_clauses = number_clauses(s);
 	//define iterator
 	unsigned int i, j;
@@ -247,46 +243,33 @@ satinstance transform_to_3sat ( satinstance s){
 		//get the current clause and its length
 		clause curr_sat_clause = get_clause(s,i);
 		unsigned int clause_length = number_lits(curr_sat_clause);
-		
-
-
 		//handle clauses that have less than 3 literals
 		if (clause_length <= 3){
 			//find how many literals clause missing
 			unsigned int missing_literals = 3 - clause_length;
 			clause new_clause = empty_clause();
-			literal l;
-			
+			literal l;			
 			for (j=0; j< clause_length; j++){
 				//copy existing clause
 				l = get_literal(curr_sat_clause,j);
 				add_literal(new_clause, l);
 			}
-
 			for(j=0; j < missing_literals; j++){
 				//add a new literal for every missing one
 				l = get_literal(new_clause,j);
 				add_literal(new_clause, l);				
 			}
-
 			add_clause(new_s,new_clause);
-
 		}else if (clause_length > 3){
-
 			unsigned int no_of_clauses = clause_length - 2;
-
 			clause curr_clause;
 			variable clause_joiner;
-			int current_sat_literal = 0;
-			
+			int current_sat_literal = 0;			
 			unsigned int curr_clause_number;
 			for (curr_clause_number = 0; curr_clause_number < no_of_clauses; curr_clause_number++){
-
 				curr_clause = empty_clause();				
-
 				//identify which clause is being created{}
 				if (curr_clause_number == 0){
-
 					//first clause
 					//for clause 1 add first two existing literals
 					literal first = get_literal(curr_sat_clause,current_sat_literal);
@@ -303,9 +286,7 @@ satinstance transform_to_3sat ( satinstance s){
 					literal lit_to_add = positive(clause_joiner);
 					add_literal(curr_clause,lit_to_add);
 					//add the whole clause to the sat instance
-					add_clause(new_s,curr_clause);
-
-				
+					add_clause(new_s,curr_clause);				
 				}else if (curr_clause_number == no_of_clauses - 1){
 					//last clause
 					//add negation from previously added new literal to curr clause
@@ -320,9 +301,7 @@ satinstance transform_to_3sat ( satinstance s){
 					add_literal(curr_clause, lit_to_add);
 					//add the whole clause to the sat instance
 					add_clause(new_s,curr_clause);
-					//remove starting clause from sat instance
-
-				
+					//remove starting clause from sat instance				
 				}else{
 					//middle clauses
 					//add negation from previously added new literal to curr clause
