@@ -4,9 +4,7 @@
 #include <stdlib.h>
 
 int main(){
-  
-  
-  
+    
 	while(1){
 		//declare variables used
 	    int num_var;

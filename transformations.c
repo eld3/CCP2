@@ -7,10 +7,25 @@
 satinstance get_sat(graph g){
 
 	satinstance s;
-	int num_var;
+	int num_var, num_nodes, num_clause;
 
 	num_var = get_variables(g);
-	printf("There are %i variables",num_var);
+	printf("There are %i variables\n",num_var);
+	num_nodes = number_vertices(g);
+	num_clause = num_nodes - (num_var*3);
+	printf("There are %i clauses\n",num_clause);
+
+
+
+
+
+
+
+
+
+
+
+
 	s = empty_satinstance();
 	return s;
 
@@ -27,7 +42,7 @@ int get_variables(graph g){
 	for(i=1; i<total_nodes; i++){
 		if(!is_adjacent(g, first_node, i)) return i;//if current node adgacent to next node move on
 	}
-
+	return -1;
 }
 
 /*Prints the solutions for the given sat instance*/
