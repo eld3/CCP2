@@ -4,6 +4,43 @@
 #include "transformations.h"
 
 
+void print_sat_solutions(colouring cols, int num_var, satinstance s, variable *array){
+
+	variable v, largest_var;
+	colour false_colour;
+	int i, last_pos_literal, node_value, value;
+
+	last_pos_literal = 2 * num_var -1;
+	false_colour = find_false_colour(cols,num_var);//find false colour
+	largest_var = largest_variable_satinstance(s);
+
+	for(i = num_var; i <= last_pos_literal; i++){
+		node_value = i % num_var;
+		v = array[node_value];
+		value = (cols[i]!=false_colour);
+		if(v<=largest_var){
+			printf("Variable %i should be %i.\n",v,value);
+		}else{
+			printf("Variable %i should be %i.  (This is only present in the 3SAT form).\n",v,value);
+		}
+	}
+}
+
+//find the colour that is not in the Y values ie. false
+int find_false_colour(colouring cols, int num_var){
+	for(int i = 0; i <= num_var; i++){
+		if(!in_y_value(cols,i,num_var)) return i;
+	}return -1;
+}
+
+//test if a colour is anyone of the y values
+int in_y_value(colouring cols, colour c, int num_var){
+	for(int i = 0; i < num_var; i++){
+		if(cols[i] == c) return 1;
+	} return 0;
+}
+
+
 
 
 /* Method to transfom a 3SAT instance to Graph*/
@@ -55,34 +92,23 @@ graph transform_to_graph ( satinstance s, variable *array, int num_var) {
 		//get corresponding variable
 		variable_index = curr_lit % num_var;
 		v = array[variable_index];
-		printf("V is %i\n",v );
 		//convert to correspondiong literal		
 		if(curr_lit<first_neg_literal){
 			l = positive(v);
-			printf("L is %i\n",l );
 		}else{
 			l= negative(v);
-			printf("L is %i\n",l );
 		}
 
 		for(curr_cl = first_clause, i = 0; curr_cl <= last_clause; curr_cl++, i++){
-
 			in_clause = 0;
 			clause current_clause = get_clause( s, i);
-
 			for(j=0; j<3; j++){
 				clause_lit = get_literal(current_clause,j);
-				printf("The current literal was %i comparing to %d\n",clause_lit,l);
 				if(clause_lit==l){
-					printf("Found literal\n");
 					in_clause = 1;
-				}
+				}			
 			}
-
-			if(!in_clause){
-				printf("Linking %i to %i\n",curr_lit, curr_cl );
-				add_edge(g,curr_lit,curr_cl);
-			}
+			if(!in_clause)add_edge(g,curr_lit,curr_cl);
 		}
 	}
 	return g;
@@ -114,8 +140,6 @@ variable* create_variable_array( satinstance s){
 			}
 		}
  	}
- 	printf("Current array pos %i\n",curr_arr_pos);
- 	printf("Get size array %i\n",get_number_variables(array) );
  	return array;
 }
 
@@ -257,6 +281,5 @@ satinstance transform_to_3sat ( satinstance s){
 			}			
 		}
 	}
-	destroy_satinstance(s);
 	return new_s;
 }
