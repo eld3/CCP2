@@ -13,7 +13,7 @@ int main(){
 	    colour ncol;
 	    colouring cols;
 	    variable *v;
-	    satinstance s, new_s;
+	    satinstance s, new_s, reworked_s;
 	    graph g;
 	    //begin methods
 	    printf("\nInstance: ");
@@ -48,6 +48,11 @@ int main(){
 		    }else{
 		    	print_sat_solutions(cols,num_var,s,v);
 		    }
+		    //get from graph to sat
+		    printf("\n\nExtension Task:\n");
+		    printf("Reformed SAT instance:\n");
+		    reworked_s = get_sat(g);
+
 		    //free memory
 		    free(v);
 		    destroy_satinstance_fully(new_s); 

@@ -20,6 +20,10 @@ extern int in_y_value(colouring cols, colour c, int num_var);
 
 extern int find_false_colour(colouring cols, int num_var);
 
+extern satinstance get_sat(graph g);
+
+extern int get_variables(graph g);
+
 /* Array Manipulation Functions */
 
 int in_array(variable val, variable *array, int size);

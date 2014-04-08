@@ -4,36 +4,70 @@
 #include "transformations.h"
 
 
-void print_sat_solutions(colouring cols, int num_var, satinstance s, variable *array){
+satinstance get_sat(graph g){
 
+	satinstance s;
+	int num_var;
+
+	num_var = get_variables(g);
+	printf("There are %i variables",num_var);
+	s = empty_satinstance();
+	return s;
+
+}
+
+int get_variables(graph g){
+	//declare variables
+	int i, total_nodes;
+	vertex first_node;
+	//set variables
+	total_nodes = number_vertices(g);
+	first_node = 0;
+	//iterate over nodes to find first node not adjacent
+	for(i=1; i<total_nodes; i++){
+		if(!is_adjacent(g, first_node, i)) return i;//if current node adgacent to next node move on
+	}
+
+}
+
+/*Prints the solutions for the given sat instance*/
+void print_sat_solutions(colouring cols, int num_var, satinstance s, variable *array){
+	//declare variables
 	variable v, largest_var;
 	colour false_colour;
 	int i, last_pos_literal, node_value, value;
-
+	//get last +ve node place
 	last_pos_literal = 2 * num_var -1;
-	false_colour = find_false_colour(cols,num_var);//find false colour
+	//get the false colour
+	false_colour = find_false_colour(cols,num_var);
+	//find the largest variable in the original sat instance
 	largest_var = largest_variable_satinstance(s);
-
+	//iterate through +ve X nodes
 	for(i = num_var; i <= last_pos_literal; i++){
+		//find the index of the actual variable represented by the node
 		node_value = i % num_var;
 		v = array[node_value];
+		//test if the node is false and assign result to the value
 		value = (cols[i]!=false_colour);
+		//print out result
 		if(v<=largest_var){
+			//if variable used in the sat and 3sat
 			printf("Variable %i should be %i.\n",v,value);
 		}else{
+			//if variable used in the 3sat only
 			printf("Variable %i should be %i.  (This is only present in the 3SAT form).\n",v,value);
 		}
 	}
 }
 
-//find the colour that is not in the Y values ie. false
+/*Find the colour not used for any Y value - ie false colour*/
 int find_false_colour(colouring cols, int num_var){
 	for(int i = 0; i <= num_var; i++){
 		if(!in_y_value(cols,i,num_var)) return i;
 	}return -1;
 }
 
-//test if a colour is anyone of the y values
+/*Test if any of the Y values is coloured the given colour (c)*/
 int in_y_value(colouring cols, colour c, int num_var){
 	for(int i = 0; i < num_var; i++){
 		if(cols[i] == c) return 1;
@@ -48,6 +82,7 @@ graph transform_to_graph ( satinstance s, variable *array, int num_var) {
 	//define iterators
 	int i, j, curr_lit;
 	int num_clause = number_clauses(s);
+	printf("Number of variables at transform start %i\n",num_var );
 	//define variables to identfy that
 	int number_of_nodes = 3 * num_var + num_clause;
 	//markers for node positioning
@@ -88,7 +123,6 @@ graph transform_to_graph ( satinstance s, variable *array, int num_var) {
 		literal l;
 		variable v;
 		literal clause_lit;
-
 		//get corresponding variable
 		variable_index = curr_lit % num_var;
 		v = array[variable_index];
@@ -121,7 +155,7 @@ variable* create_variable_array( satinstance s){
 	int i, j;
 	//find number of clauses 
 	int num_clause = number_clauses(s);
-	int max_variables = 3 * num_clause;
+	int max_variables = 3 * num_clause +1;
 	//define array to store the variables
 	variable *array = malloc(sizeof(variable)*max_variables);
 	//set contents to 0
