@@ -230,7 +230,7 @@ void write_literal ( FILE *f, literal l)
 
 void write_clause ( FILE *f, clause c)
 {
-  int i;
+  unsigned int i;
   unsigned int n = number_lits(c);
   fprintf(f,"[");
   for (i = 0; i < n; i++)
@@ -244,7 +244,7 @@ void write_clause ( FILE *f, clause c)
 
 void write_satinstance ( FILE *f, satinstance  s)
 {
-  int i;
+  unsigned int i;
   unsigned int n = number_clauses(s);
   fprintf(f,"{");
   for (i = 0; i < n; i++)
