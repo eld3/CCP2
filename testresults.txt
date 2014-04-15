@@ -881,42 +881,556 @@ There are 7 clauses
 {[8, 9, 10], [11, 12, -10], [13], [8, -14], [-13], [11, 14, 15], [8, 9, 10]}
 
 ===============================================================================
+
+Instance: {[2,2,2]}
+
+SAT form:
+{[2, 2, 2]}
+
+Transformed to 3SAT form:
+{[2, 2, 2]}
+
+Transformed to Graph:
+
+Undirected graph 4 vertices, adjacencies:
+  0:
+  1: 2
+  2: 1 3
+  3: 2
+
+Unable to use graph colouring to solve when less than 4 variables
+
+
+Extension Task:
+Reformed SAT instance:
+{[1]}
+
 ===============================================================================
+
+Instance: {[2,3,3][-3,-3,4][-4,5,6]}
+
+SAT form:
+{[2, 3, 3], [-3, -3, 4], [-4, 5, 6]}
+
+Transformed to 3SAT form:
+{[2, 3, 3], [-3, -3, 4], [-4, 5, 6]}
+
+Transformed to Graph:
+
+Undirected graph 18 vertices, adjacencies:
+  0: 1 2 3 4 6 7 8 9 11 12 13 14
+  1: 0 2 3 4 5 7 8 9 10 12 13 14
+  2: 0 1 3 4 5 6 8 9 10 11 13 14
+  3: 0 1 2 4 5 6 7 9 10 11 12 14
+  4: 0 1 2 3 5 6 7 8 10 11 12 13
+  5: 1 2 3 4 10 16 17
+  6: 0 2 3 4 11 16 17
+  7: 0 1 3 4 12 15 17
+  8: 0 1 2 4 13 15 16
+  9: 0 1 2 3 14 15 16
+  10: 1 2 3 4 5 15 16 17
+  11: 0 2 3 4 6 15 17
+  12: 0 1 3 4 7 15 16
+  13: 0 1 2 4 8 15 16 17
+  14: 0 1 2 3 9 15 16 17
+  15: 7 8 9 10 11 12 13 14
+  16: 5 6 8 9 10 12 13 14
+  17: 5 6 7 10 11 13 14
+
+Permitted to use 6 colours
+
+Variable 2 should be 1.
+Variable 3 should be 1.
+Variable 4 should be 1.
+Variable 5 should be 1.
+Variable 6 should be 1.
+
+
+Extension Task:
+Reformed SAT instance:
+{[5, 6], [7, -6], [8, 9, -7]}
+
 ===============================================================================
+
+Instance: {[1,2,3,4,4,4,4]}
+
+SAT form:
+{[1, 2, 3, 4, 4, 4, 4]}
+
+Transformed to 3SAT form:
+{[1, 2, 5], [-5, 3, 6], [-6, 4, 7], [-7, 4, 8], [-8, 4, 4]}
+
+Transformed to Graph:
+
+Undirected graph 29 vertices, adjacencies:
+  0: 1 2 3 4 5 6 7 9 10 11 12 13 14 15 17 18 19 20 21 22 23
+  1: 0 2 3 4 5 6 7 8 10 11 12 13 14 15 16 18 19 20 21 22 23
+  2: 0 1 3 4 5 6 7 8 9 11 12 13 14 15 16 17 19 20 21 22 23
+  3: 0 1 2 4 5 6 7 8 9 10 12 13 14 15 16 17 18 20 21 22 23
+  4: 0 1 2 3 5 6 7 8 9 10 11 13 14 15 16 17 18 19 21 22 23
+  5: 0 1 2 3 4 6 7 8 9 10 11 12 14 15 16 17 18 19 20 22 23
+  6: 0 1 2 3 4 5 7 8 9 10 11 12 13 15 16 17 18 19 20 21 23
+  7: 0 1 2 3 4 5 6 8 9 10 11 12 13 14 16 17 18 19 20 21 22
+  8: 1 2 3 4 5 6 7 16 25 26 27 28
+  9: 0 2 3 4 5 6 7 17 25 26 27 28
+  10: 0 1 3 4 5 6 7 18 25 26 27 28
+  11: 0 1 2 4 5 6 7 19 24 26 27 28
+  12: 0 1 2 3 5 6 7 20 24 26 27 28
+  13: 0 1 2 3 4 6 7 21 24 25
+  14: 0 1 2 3 4 5 7 22 24 25 27 28
+  15: 0 1 2 3 4 5 6 23 24 25 26 28
+  16: 1 2 3 4 5 6 7 8 24 25 26 27 28
+  17: 0 2 3 4 5 6 7 9 24 25 26 27 28
+  18: 0 1 3 4 5 6 7 10 24 26 27 28
+  19: 0 1 2 4 5 6 7 11 24 25 26 27 28
+  20: 0 1 2 3 5 6 7 12 24 25 27 28
+  21: 0 1 2 3 4 6 7 13 24 25 26 27 28
+  22: 0 1 2 3 4 5 7 14 24 25 26 28
+  23: 0 1 2 3 4 5 6 15 24 25 26 27
+  24: 11 12 13 14 15 16 17 18 19 20 21 22 23
+  25: 8 9 10 13 14 15 16 17 19 20 21 22 23
+  26: 8 9 10 11 12 15 16 17 18 19 21 22 23
+  27: 8 9 10 11 12 14 16 17 18 19 20 21 23
+  28: 8 9 10 11 12 14 15 16 17 18 19 20 21 22
+
+Permitted to use 9 colours
+
+Variable 1 should be 1.
+Variable 2 should be 1.
+Variable 5 should be 1.  (This is only present in the 3SAT form).
+Variable 3 should be 1.
+Variable 6 should be 1.  (This is only present in the 3SAT form).
+Variable 4 should be 1.
+Variable 7 should be 1.  (This is only present in the 3SAT form).
+Variable 8 should be 1.  (This is only present in the 3SAT form).
+
+
+Extension Task:
+Reformed SAT instance:
+{[8, 9, 10], [11, 12, -10], [13, 14, -12], [13, 15, -14], [13, -15]}
+
 ===============================================================================
+
+When putting in 100 variables all in one clause eg {[1,2,3 ... 100]}
+
+Did not include graph as could not retrieve all from std output
+
+Permitted to use 198 colours
+
+Variable 1 should be 1.
+Variable 2 should be 1.
+Variable 101 should be 1.  (This is only present in the 3SAT form).
+Variable 3 should be 1.
+Variable 102 should be 1.  (This is only present in the 3SAT form).
+Variable 4 should be 1.
+Variable 103 should be 1.  (This is only present in the 3SAT form).
+Variable 5 should be 1.
+Variable 104 should be 1.  (This is only present in the 3SAT form).
+Variable 6 should be 1.
+Variable 105 should be 1.  (This is only present in the 3SAT form).
+Variable 7 should be 1.
+Variable 106 should be 1.  (This is only present in the 3SAT form).
+Variable 8 should be 1.
+Variable 107 should be 1.  (This is only present in the 3SAT form).
+Variable 9 should be 1.
+Variable 108 should be 1.  (This is only present in the 3SAT form).
+Variable 10 should be 1.
+Variable 109 should be 1.  (This is only present in the 3SAT form).
+Variable 11 should be 1.
+Variable 110 should be 1.  (This is only present in the 3SAT form).
+Variable 12 should be 1.
+Variable 111 should be 1.  (This is only present in the 3SAT form).
+Variable 13 should be 1.
+Variable 112 should be 1.  (This is only present in the 3SAT form).
+Variable 14 should be 1.
+Variable 113 should be 1.  (This is only present in the 3SAT form).
+Variable 15 should be 1.
+Variable 114 should be 1.  (This is only present in the 3SAT form).
+Variable 16 should be 1.
+Variable 115 should be 1.  (This is only present in the 3SAT form).
+Variable 17 should be 1.
+Variable 116 should be 1.  (This is only present in the 3SAT form).
+Variable 18 should be 1.
+Variable 117 should be 1.  (This is only present in the 3SAT form).
+Variable 19 should be 1.
+Variable 118 should be 1.  (This is only present in the 3SAT form).
+Variable 20 should be 1.
+Variable 119 should be 1.  (This is only present in the 3SAT form).
+Variable 21 should be 1.
+Variable 120 should be 1.  (This is only present in the 3SAT form).
+Variable 22 should be 1.
+Variable 121 should be 1.  (This is only present in the 3SAT form).
+Variable 23 should be 1.
+Variable 122 should be 1.  (This is only present in the 3SAT form).
+Variable 24 should be 1.
+Variable 123 should be 1.  (This is only present in the 3SAT form).
+Variable 25 should be 1.
+Variable 124 should be 1.  (This is only present in the 3SAT form).
+Variable 26 should be 1.
+Variable 125 should be 1.  (This is only present in the 3SAT form).
+Variable 27 should be 1.
+Variable 126 should be 1.  (This is only present in the 3SAT form).
+Variable 28 should be 1.
+Variable 127 should be 1.  (This is only present in the 3SAT form).
+Variable 29 should be 1.
+Variable 128 should be 1.  (This is only present in the 3SAT form).
+Variable 30 should be 1.
+Variable 129 should be 1.  (This is only present in the 3SAT form).
+Variable 31 should be 1.
+Variable 130 should be 1.  (This is only present in the 3SAT form).
+Variable 32 should be 1.
+Variable 131 should be 1.  (This is only present in the 3SAT form).
+Variable 33 should be 1.
+Variable 132 should be 1.  (This is only present in the 3SAT form).
+Variable 34 should be 1.
+Variable 133 should be 1.  (This is only present in the 3SAT form).
+Variable 35 should be 1.
+Variable 134 should be 1.  (This is only present in the 3SAT form).
+Variable 36 should be 1.
+Variable 135 should be 1.  (This is only present in the 3SAT form).
+Variable 37 should be 1.
+Variable 136 should be 1.  (This is only present in the 3SAT form).
+Variable 38 should be 1.
+Variable 137 should be 1.  (This is only present in the 3SAT form).
+Variable 39 should be 1.
+Variable 138 should be 1.  (This is only present in the 3SAT form).
+Variable 40 should be 1.
+Variable 139 should be 1.  (This is only present in the 3SAT form).
+Variable 41 should be 1.
+Variable 140 should be 1.  (This is only present in the 3SAT form).
+Variable 42 should be 1.
+Variable 141 should be 1.  (This is only present in the 3SAT form).
+Variable 43 should be 1.
+Variable 142 should be 1.  (This is only present in the 3SAT form).
+Variable 44 should be 1.
+Variable 143 should be 1.  (This is only present in the 3SAT form).
+Variable 45 should be 1.
+Variable 144 should be 1.  (This is only present in the 3SAT form).
+Variable 46 should be 1.
+Variable 145 should be 1.  (This is only present in the 3SAT form).
+Variable 47 should be 1.
+Variable 146 should be 1.  (This is only present in the 3SAT form).
+Variable 48 should be 1.
+Variable 147 should be 1.  (This is only present in the 3SAT form).
+Variable 49 should be 1.
+Variable 148 should be 1.  (This is only present in the 3SAT form).
+Variable 50 should be 1.
+Variable 149 should be 1.  (This is only present in the 3SAT form).
+Variable 51 should be 1.
+Variable 150 should be 1.  (This is only present in the 3SAT form).
+Variable 52 should be 1.
+Variable 151 should be 1.  (This is only present in the 3SAT form).
+Variable 53 should be 1.
+Variable 152 should be 1.  (This is only present in the 3SAT form).
+Variable 54 should be 1.
+Variable 153 should be 1.  (This is only present in the 3SAT form).
+Variable 55 should be 1.
+Variable 154 should be 1.  (This is only present in the 3SAT form).
+Variable 56 should be 1.
+Variable 155 should be 1.  (This is only present in the 3SAT form).
+Variable 57 should be 1.
+Variable 156 should be 1.  (This is only present in the 3SAT form).
+Variable 58 should be 1.
+Variable 157 should be 1.  (This is only present in the 3SAT form).
+Variable 59 should be 1.
+Variable 158 should be 1.  (This is only present in the 3SAT form).
+Variable 60 should be 1.
+Variable 159 should be 1.  (This is only present in the 3SAT form).
+Variable 61 should be 1.
+Variable 160 should be 1.  (This is only present in the 3SAT form).
+Variable 62 should be 1.
+Variable 161 should be 1.  (This is only present in the 3SAT form).
+Variable 63 should be 1.
+Variable 162 should be 1.  (This is only present in the 3SAT form).
+Variable 64 should be 1.
+Variable 163 should be 1.  (This is only present in the 3SAT form).
+Variable 65 should be 1.
+Variable 164 should be 1.  (This is only present in the 3SAT form).
+Variable 66 should be 1.
+Variable 165 should be 1.  (This is only present in the 3SAT form).
+Variable 67 should be 1.
+Variable 166 should be 1.  (This is only present in the 3SAT form).
+Variable 68 should be 1.
+Variable 167 should be 1.  (This is only present in the 3SAT form).
+Variable 69 should be 1.
+Variable 168 should be 1.  (This is only present in the 3SAT form).
+Variable 70 should be 1.
+Variable 169 should be 1.  (This is only present in the 3SAT form).
+Variable 71 should be 1.
+Variable 170 should be 1.  (This is only present in the 3SAT form).
+Variable 72 should be 1.
+Variable 171 should be 1.  (This is only present in the 3SAT form).
+Variable 73 should be 1.
+Variable 172 should be 1.  (This is only present in the 3SAT form).
+Variable 74 should be 1.
+Variable 173 should be 1.  (This is only present in the 3SAT form).
+Variable 75 should be 1.
+Variable 174 should be 1.  (This is only present in the 3SAT form).
+Variable 76 should be 1.
+Variable 175 should be 1.  (This is only present in the 3SAT form).
+Variable 77 should be 1.
+Variable 176 should be 1.  (This is only present in the 3SAT form).
+Variable 78 should be 1.
+Variable 177 should be 1.  (This is only present in the 3SAT form).
+Variable 79 should be 1.
+Variable 178 should be 1.  (This is only present in the 3SAT form).
+Variable 80 should be 1.
+Variable 179 should be 1.  (This is only present in the 3SAT form).
+Variable 81 should be 1.
+Variable 180 should be 1.  (This is only present in the 3SAT form).
+Variable 82 should be 1.
+Variable 181 should be 1.  (This is only present in the 3SAT form).
+Variable 83 should be 1.
+Variable 182 should be 1.  (This is only present in the 3SAT form).
+Variable 84 should be 1.
+Variable 183 should be 1.  (This is only present in the 3SAT form).
+Variable 85 should be 1.
+Variable 184 should be 1.  (This is only present in the 3SAT form).
+Variable 86 should be 1.
+Variable 185 should be 1.  (This is only present in the 3SAT form).
+Variable 87 should be 1.
+Variable 186 should be 1.  (This is only present in the 3SAT form).
+Variable 88 should be 1.
+Variable 187 should be 1.  (This is only present in the 3SAT form).
+Variable 89 should be 1.
+Variable 188 should be 1.  (This is only present in the 3SAT form).
+Variable 90 should be 1.
+Variable 189 should be 1.  (This is only present in the 3SAT form).
+Variable 91 should be 1.
+Variable 190 should be 1.  (This is only present in the 3SAT form).
+Variable 92 should be 1.
+Variable 191 should be 1.  (This is only present in the 3SAT form).
+Variable 93 should be 1.
+Variable 192 should be 1.  (This is only present in the 3SAT form).
+Variable 94 should be 1.
+Variable 193 should be 1.  (This is only present in the 3SAT form).
+Variable 95 should be 1.
+Variable 194 should be 1.  (This is only present in the 3SAT form).
+Variable 96 should be 1.
+Variable 195 should be 1.  (This is only present in the 3SAT form).
+Variable 97 should be 1.
+Variable 196 should be 1.  (This is only present in the 3SAT form).
+Variable 98 should be 1.
+Variable 197 should be 1.  (This is only present in the 3SAT form).
+Variable 99 should be 1.
+Variable 100 should be 1.
+
+
+Extension Task:
+Reformed SAT instance:
+{[197, 198, 199], [200, 201, -199], [202, 203, -201], [204, 205, -203], [206, 207, -205], [208, 209, -207], [210, 211, -209], [212, 213, -211], [214, 215, -213], [216, 217, -215], [218, 219, -217], [220, 221, -219], [222, 223, -221], [224, 225, -223], [226, 227, -225], [228, 229, -227], [230, 231, -229], [232, 233, -231], [234, 235, -233], [236, 237, -235], [238, 239, -237], [240, 241, -239], [242, 243, -241], [244, 245, -243], [246, 247, -245], [248, 249, -247], [250, 251, -249], [252, 253, -251], [254, 255, -253], [256, 257, -255], [258, 259, -257], [260, 261, -259], [262, 263, -261], [264, 265, -263], [266, 267, -265], [268, 269, -267], [270, 271, -269], [272, 273, -271], [274, 275, -273], [276, 277, -275], [278, 279, -277], [280, 281, -279], [282, 283, -281], [284, 285, -283], [286, 287, -285], [288, 289, -287], [290, 291, -289], [292, 293, -291], [294, 295, -293], [296, 297, -295], [298, 299, -297], [300, 301, -299], [302, 303, -301], [304, 305, -303], [306, 307, -305], [308, 309, -307], [310, 311, -309], [312, 313, -311], [314, 315, -313], [316, 317, -315], [318, 319, -317], [320, 321, -319], [322, 323, -321], [324, 325, -323], [326, 327, -325], [328, 329, -327], [330, 331, -329], [332, 333, -331], [334, 335, -333], [336, 337, -335], [338, 339, -337], [340, 341, -339], [342, 343, -341], [344, 345, -343], [346, 347, -345], [348, 349, -347], [350, 351, -349], [352, 353, -351], [354, 355, -353], [356, 357, -355], [358, 359, -357], [360, 361, -359], [362, 363, -361], [364, 365, -363], [366, 367, -365], [368, 369, -367], [370, 371, -369], [372, 373, -371], [374, 375, -373], [376, 377, -375], [378, 379, -377], [380, 381, -379], [382, 383, -381], [384, 385, -383], [386, 387, -385], [388, 389, -387], [390, 391, -389], [392, 393, -391]}
+
 ===============================================================================
-===============================================================================
-===============================================================================
-===============================================================================
-===============================================================================
-===============================================================================
-===============================================================================
-===============================================================================
-===============================================================================
-===============================================================================
-===============================================================================
-===============================================================================
-===============================================================================
-===============================================================================
-===============================================================================
-===============================================================================
-===============================================================================
-===============================================================================
-===============================================================================
-===============================================================================
-===============================================================================
-===============================================================================
-===============================================================================
-===============================================================================
-===============================================================================
-===============================================================================
-===============================================================================
-===============================================================================
-===============================================================================
-===============================================================================
-===============================================================================
-===============================================================================
-===============================================================================
-===============================================================================
-===============================================================================
+
+I then entered the above reformed expression in as a starting sat instance.
+
+Did not include graph as could not retrieve all from std output
+
+
+Permitted to use 198 colours
+
+Variable 197 should be 1.
+Variable 198 should be 1.
+Variable 199 should be 1.
+Variable 200 should be 1.
+Variable 201 should be 1.
+Variable 202 should be 1.
+Variable 203 should be 1.
+Variable 204 should be 1.
+Variable 205 should be 1.
+Variable 206 should be 1.
+Variable 207 should be 1.
+Variable 208 should be 1.
+Variable 209 should be 1.
+Variable 210 should be 1.
+Variable 211 should be 1.
+Variable 212 should be 1.
+Variable 213 should be 1.
+Variable 214 should be 1.
+Variable 215 should be 1.
+Variable 216 should be 1.
+Variable 217 should be 1.
+Variable 218 should be 1.
+Variable 219 should be 1.
+Variable 220 should be 1.
+Variable 221 should be 1.
+Variable 222 should be 1.
+Variable 223 should be 1.
+Variable 224 should be 1.
+Variable 225 should be 1.
+Variable 226 should be 1.
+Variable 227 should be 1.
+Variable 228 should be 1.
+Variable 229 should be 1.
+Variable 230 should be 1.
+Variable 231 should be 1.
+Variable 232 should be 1.
+Variable 233 should be 1.
+Variable 234 should be 1.
+Variable 235 should be 1.
+Variable 236 should be 1.
+Variable 237 should be 1.
+Variable 238 should be 1.
+Variable 239 should be 1.
+Variable 240 should be 1.
+Variable 241 should be 1.
+Variable 242 should be 1.
+Variable 243 should be 1.
+Variable 244 should be 1.
+Variable 245 should be 1.
+Variable 246 should be 1.
+Variable 247 should be 1.
+Variable 248 should be 1.
+Variable 249 should be 1.
+Variable 250 should be 1.
+Variable 251 should be 1.
+Variable 252 should be 1.
+Variable 253 should be 1.
+Variable 254 should be 1.
+Variable 255 should be 1.
+Variable 256 should be 1.
+Variable 257 should be 1.
+Variable 258 should be 1.
+Variable 259 should be 1.
+Variable 260 should be 1.
+Variable 261 should be 1.
+Variable 262 should be 1.
+Variable 263 should be 1.
+Variable 264 should be 1.
+Variable 265 should be 1.
+Variable 266 should be 1.
+Variable 267 should be 1.
+Variable 268 should be 1.
+Variable 269 should be 1.
+Variable 270 should be 1.
+Variable 271 should be 1.
+Variable 272 should be 1.
+Variable 273 should be 1.
+Variable 274 should be 1.
+Variable 275 should be 1.
+Variable 276 should be 1.
+Variable 277 should be 1.
+Variable 278 should be 1.
+Variable 279 should be 1.
+Variable 280 should be 1.
+Variable 281 should be 1.
+Variable 282 should be 1.
+Variable 283 should be 1.
+Variable 284 should be 1.
+Variable 285 should be 1.
+Variable 286 should be 1.
+Variable 287 should be 1.
+Variable 288 should be 1.
+Variable 289 should be 1.
+Variable 290 should be 1.
+Variable 291 should be 1.
+Variable 292 should be 1.
+Variable 293 should be 1.
+Variable 294 should be 1.
+Variable 295 should be 1.
+Variable 296 should be 1.
+Variable 297 should be 1.
+Variable 298 should be 1.
+Variable 299 should be 1.
+Variable 300 should be 1.
+Variable 301 should be 1.
+Variable 302 should be 1.
+Variable 303 should be 1.
+Variable 304 should be 1.
+Variable 305 should be 1.
+Variable 306 should be 1.
+Variable 307 should be 1.
+Variable 308 should be 1.
+Variable 309 should be 1.
+Variable 310 should be 1.
+Variable 311 should be 1.
+Variable 312 should be 1.
+Variable 313 should be 1.
+Variable 314 should be 1.
+Variable 315 should be 1.
+Variable 316 should be 1.
+Variable 317 should be 1.
+Variable 318 should be 1.
+Variable 319 should be 1.
+Variable 320 should be 1.
+Variable 321 should be 1.
+Variable 322 should be 1.
+Variable 323 should be 1.
+Variable 324 should be 1.
+Variable 325 should be 1.
+Variable 326 should be 1.
+Variable 327 should be 1.
+Variable 328 should be 1.
+Variable 329 should be 1.
+Variable 330 should be 1.
+Variable 331 should be 1.
+Variable 332 should be 1.
+Variable 333 should be 1.
+Variable 334 should be 1.
+Variable 335 should be 1.
+Variable 336 should be 1.
+Variable 337 should be 1.
+Variable 338 should be 1.
+Variable 339 should be 1.
+Variable 340 should be 1.
+Variable 341 should be 1.
+Variable 342 should be 1.
+Variable 343 should be 1.
+Variable 344 should be 1.
+Variable 345 should be 1.
+Variable 346 should be 1.
+Variable 347 should be 1.
+Variable 348 should be 1.
+Variable 349 should be 1.
+Variable 350 should be 1.
+Variable 351 should be 1.
+Variable 352 should be 1.
+Variable 353 should be 1.
+Variable 354 should be 1.
+Variable 355 should be 1.
+Variable 356 should be 1.
+Variable 357 should be 1.
+Variable 358 should be 1.
+Variable 359 should be 1.
+Variable 360 should be 1.
+Variable 361 should be 1.
+Variable 362 should be 1.
+Variable 363 should be 1.
+Variable 364 should be 1.
+Variable 365 should be 1.
+Variable 366 should be 1.
+Variable 367 should be 1.
+Variable 368 should be 1.
+Variable 369 should be 1.
+Variable 370 should be 1.
+Variable 371 should be 1.
+Variable 372 should be 1.
+Variable 373 should be 1.
+Variable 374 should be 1.
+Variable 375 should be 1.
+Variable 376 should be 1.
+Variable 377 should be 1.
+Variable 378 should be 1.
+Variable 379 should be 1.
+Variable 380 should be 1.
+Variable 381 should be 1.
+Variable 382 should be 1.
+Variable 383 should be 1.
+Variable 384 should be 1.
+Variable 385 should be 1.
+Variable 386 should be 1.
+Variable 387 should be 1.
+Variable 388 should be 1.
+Variable 389 should be 1.
+Variable 390 should be 1.
+Variable 391 should be 1.
+Variable 392 should be 1.
+Variable 393 should be 1.
+
+
+Extension Task:
+Reformed SAT instance:
+{[197, 198, 199], [200, 201, -199], [202, 203, -201], [204, 205, -203], [206, 207, -205], [208, 209, -207], [210, 211, -209], [212, 213, -211], [214, 215, -213], [216, 217, -215], [218, 219, -217], [220, 221, -219], [222, 223, -221], [224, 225, -223], [226, 227, -225], [228, 229, -227], [230, 231, -229], [232, 233, -231], [234, 235, -233], [236, 237, -235], [238, 239, -237], [240, 241, -239], [242, 243, -241], [244, 245, -243], [246, 247, -245], [248, 249, -247], [250, 251, -249], [252, 253, -251], [254, 255, -253], [256, 257, -255], [258, 259, -257], [260, 261, -259], [262, 263, -261], [264, 265, -263], [266, 267, -265], [268, 269, -267], [270, 271, -269], [272, 273, -271], [274, 275, -273], [276, 277, -275], [278, 279, -277], [280, 281, -279], [282, 283, -281], [284, 285, -283], [286, 287, -285], [288, 289, -287], [290, 291, -289], [292, 293, -291], [294, 295, -293], [296, 297, -295], [298, 299, -297], [300, 301, -299], [302, 303, -301], [304, 305, -303], [306, 307, -305], [308, 309, -307], [310, 311, -309], [312, 313, -311], [314, 315, -313], [316, 317, -315], [318, 319, -317], [320, 321, -319], [322, 323, -321], [324, 325, -323], [326, 327, -325], [328, 329, -327], [330, 331, -329], [332, 333, -331], [334, 335, -333], [336, 337, -335], [338, 339, -337], [340, 341, -339], [342, 343, -341], [344, 345, -343], [346, 347, -345], [348, 349, -347], [350, 351, -349], [352, 353, -351], [354, 355, -353], [356, 357, -355], [358, 359, -357], [360, 361, -359], [362, 363, -361], [364, 365, -363], [366, 367, -365], [368, 369, -367], [370, 371, -369], [372, 373, -371], [374, 375, -373], [376, 377, -375], [378, 379, -377], [380, 381, -379], [382, 383, -381], [384, 385, -383], [386, 387, -385], [388, 389, -387], [390, 391, -389], [392, 393, -391]}
+
+
 ===============================================================================

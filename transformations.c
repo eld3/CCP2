@@ -297,6 +297,7 @@ satinstance get_sat(graph g){
 		c = empty_clause();		
 		for(j=num_var; j<=3*num_var-1; j++ ){
 			if(!is_adjacent(g,i,j)){
+				//simply use j as avaribale as we know it increments for each new variable
 				if(j<2*num_var){
 					l = positive(j);
 				}else{
